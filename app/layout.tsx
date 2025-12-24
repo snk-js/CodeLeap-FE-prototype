@@ -1,8 +1,8 @@
 import "@/styles/globals.css";
 import "@/styles/globals.scss";
-import { ThemeProvider } from "next-themes";
 
 import { inter } from "@/styles/fonts";
+import Providers from "./providers/Providers";
 import ThemeSwitch from "@/components/ThemeSwitch/ThemeSwitcher";
 
 export default function RootLayout(props: {
@@ -14,12 +14,12 @@ export default function RootLayout(props: {
   return (
     <html className={inter.className} suppressHydrationWarning>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="w-full flex justify-center items-center h-[3rem]">
-            <ThemeSwitch />
-          </div>
+        <Providers>
+        <div className="w-full flex justify-center items-center h-[3rem]">
+          <ThemeSwitch />
+        </div>
           {props.children}
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );
