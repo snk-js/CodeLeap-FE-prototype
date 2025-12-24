@@ -1,39 +1,32 @@
-// Define light theme variables
-$foreground-rgb-light: 0, 0, 0;
-$background-start-rgb-light: 214, 219, 220;
-$background-end-rgb-light: 255, 255, 255;
-$background-secondary-rgb-light: 200, 200, 200;
-$background-secondary-light-rgb-light: 216, 249, 210;
-$highlight-rgb-light: 37, 38, 38;
-$secondary-rgb-light: 3, 58, 64;
 
-// Define dark theme variables
-$foreground-rgb-dark: 255, 255, 255;
-$background-start-rgb-dark: 0, 0, 0;
-$background-end-rgb-dark: 0, 0, 0;
-$background-secondary-rgb-dark: 33, 33, 33;
-$background-secondary-light-rgb-dark: 37, 37, 37;
-$highlight-rgb-dark: 216, 249, 210;
-$secondary-rgb-dark: 99, 93, 80;
+// Light theme variables
+$base-background: 211, 211, 211;    // Light gray
+$primary-color: 118, 149, 236;      // Blue 
+$background-text: 255, 255, 255;    // White
+$foreground-text: 0, 0, 0;          // Black
+$lighter-text: 119, 119, 119;       // a bit grey
+
+// Dark theme variables
+$base-background-dark: 18, 18, 18;       // Very dark gray (not pure black)
+$primary-color-dark: 138, 169, 255;      // Lighter/brighter blue for better contrast
+$background-text-dark: 0, 0, 0;          // Black (reversed from light theme)
+$foreground-text-dark: 255, 255, 255;    // White
+$lighter-text-dark: 59, 58, 58;          // a bit lighter black  
 
 @mixin light-theme {
-  --foreground-rgb: #{$foreground-rgb-light};
-  --background-start-rgb: #{$background-start-rgb-light};
-  --background-end-rgb: #{$background-end-rgb-light};
-  --background-secondary-rgb: #{$background-secondary-rgb-light};
-  --background-secondary-light-rgb: #{$background-secondary-light-rgb-light};
-  --highlight: #{$highlight-rgb-light};
-  --secondary: #{$secondary-rgb-light};
+  --base-background-rgb: #{$base-background};
+  --primary-color-rgb: #{$primary-color};
+  --background-text-rgb: #{$background-text};
+  --foreground-text-rgb: #{$foreground-text};
+  --lighter-tex-rgb: #{$lighter-text};
 }
 
 @mixin dark-theme {
-  --foreground-rgb: #{$foreground-rgb-dark};
-  --background-start-rgb: #{$background-start-rgb-dark};
-  --background-end-rgb: #{$background-end-rgb-dark};
-  --background-secondary-rgb: #{$background-secondary-rgb-dark};
-  --background-secondary-light-rgb: #{$background-secondary-light-rgb-dark};
-  --highlight: #{$highlight-rgb-dark};
-  --secondary: #{$secondary-rgb-dark};
+  --base-background-rgb: #{$base-background-dark};
+  --primary-color-rgb: #{$primary-color-dark};
+  --background-text-rgb: #{$background-text-dark};
+  --foreground-text-rgb: #{$foreground-text-dark};
+  --lighter-tex-rgb: #{$lighter-text-dark};
 }
 :root {
   @include light-theme;
@@ -50,15 +43,15 @@ $secondary-rgb-dark: 99, 93, 80;
 html {
   font-size: 16px;
   font-family: 'Roboto', sans-serif;
-  background: rgb(var(--background-end-rgb));
+  background: rgb(var(--base-background-rgb));
   margin: 0;
   padding: 0;
 }
 
 body {
-  padding-top: 3rem;
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-end-rgb-light));
+  padding-top: 0;
+  color: rgb(var(--foreground-text-rgb));
+  background: rgb(var(--base-background-rgb));
   margin: 0;
 }
 
