@@ -1,0 +1,7 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: 1500px; // Approximate for ~5 posts + header + form; adjust as needed
+  position: relative; // For sticky header positioning
+  background: rgb(var(--background-text-rgb));
+}

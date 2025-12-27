@@ -1,0 +1,18 @@
+.header {
+  background: rgb(var(--primary-color-rgb));
+  height: 80px;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  width: 100%;
+  max-width: 800px; // Match container
+  margin: 0 auto;
+  h1 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: rgb(var(--background-text-rgb));
+    line-height: 100%;
+    margin-left: 2rem;
+  }
+}

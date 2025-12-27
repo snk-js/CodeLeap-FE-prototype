@@ -1,0 +1,14 @@
+.post {
+  background: rgb(var(--background-text-rgb));
+  border: 1px solid rgb(var(--lighter-text-rgb));
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  p {
+    font-size: 14px;
+  }
+}

@@ -1,5 +1,12 @@
-import { Home } from "@/components/Home/Home";
+"use client";
+
+import Container from "@/components/Container/Container";
+import Home from "@/components/Home/Home";
 
 export default function App() {
-  return <Home />;
+  return (
+    <Container>
+      <Home />
+    </Container>
+  );
 }

@@ -1,0 +1,52 @@
+// app/components/AppBar/AppBar.module.scss
+.AppBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
+  width: 100%;
+  padding: 0 16px;
+  background: rgba(var(--foreground-text-rgb), 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(30px);
+  border-bottom: 1px solid rgba(var(--lighter-text-rgb), 0.3);
+  position: sticky; 
+  top: 0;
+  left: 0;
+  z-index: 20;
+}
+
+.username {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: rgb(var(--primary-color-rgb));
+}
+
+.center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+}
+
+.logout {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: rgb(var(--primary-color-rgb));
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background: rgba(var(--primary-color-rgb), 0.1);
+  }
+}

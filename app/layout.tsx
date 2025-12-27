@@ -6,8 +6,8 @@ import "@/styles/globals.scss";
 import { usePathname, useRouter } from "next/navigation";
 import { inter } from "@/styles/fonts";
 import Providers from "./providers/Providers";
-import ThemeSwitch from "@/components/ThemeSwitch/ThemeSwitcher";
 import { useEffect } from "react";
+import AppBar from "@/components/AppBar/AppBar";
 
 export default function RootLayout(props: {
   children: React.ReactNode;
@@ -29,9 +29,7 @@ export default function RootLayout(props: {
     <html className={inter.className} suppressHydrationWarning>
       <body>
         <Providers>
-          <div className="w-full flex justify-center items-center h-[3rem] fixed z-51">
-            <ThemeSwitch />
-          </div>
+          <AppBar />
           {props.children}
         </Providers>
       </body>
