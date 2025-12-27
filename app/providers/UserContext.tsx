@@ -7,7 +7,7 @@ import React, {
   useState,
   ReactNode,
 } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 interface UserContextType {
   username?: string;
@@ -19,6 +19,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const getUsernameFromLocalStorage = (() => {
     if (typeof window !== "undefined") {
@@ -55,6 +56,13 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       router.push("/signup");
     }
   };
+
+  useEffect(() => {
+    const username = localStorage.getItem("username");
+    if (!username && pathname !== "/signup") {
+      router.push("/signup");
+    }
+  }, [pathname, router]);
 
   useEffect(() => {
     setUsernameState(getUsernameFromLocalStorage);
