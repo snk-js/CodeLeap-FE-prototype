@@ -9,7 +9,7 @@ $lighter-text: 119, 119, 119;       // a bit grey
 // Dark theme variables
 $base-background-dark: 18, 18, 18;       // Very dark gray (not pure black)
 $primary-color-dark: 138, 169, 255;      // Lighter/brighter blue for better contrast
-$background-text-dark: 0, 0, 0;          // Black (reversed from light theme)
+$background-text-dark: 28, 28, 28;          // Black (reversed from light theme)
 $foreground-text-dark: 255, 255, 255;    // White
 $lighter-text-dark: 59, 58, 58;          // a bit lighter black  
 
@@ -18,7 +18,7 @@ $lighter-text-dark: 59, 58, 58;          // a bit lighter black
   --primary-color-rgb: #{$primary-color};
   --background-text-rgb: #{$background-text};
   --foreground-text-rgb: #{$foreground-text};
-  --lighter-tex-rgb: #{$lighter-text};
+  --lighter-text-rgb: #{$lighter-text};
 }
 
 @mixin dark-theme {
@@ -26,8 +26,14 @@ $lighter-text-dark: 59, 58, 58;          // a bit lighter black
   --primary-color-rgb: #{$primary-color-dark};
   --background-text-rgb: #{$background-text-dark};
   --foreground-text-rgb: #{$foreground-text-dark};
-  --lighter-tex-rgb: #{$lighter-text-dark};
+  --lighter-text-rgb: #{$lighter-text-dark};
 }
+
+button {
+  min-width: 120px;
+  height: 32px;
+}
+
 :root {
   @include light-theme;
 }

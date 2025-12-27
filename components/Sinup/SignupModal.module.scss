@@ -1,0 +1,43 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;  
+
+  label {
+    font-size: 14px;
+    color: rgb(var(--lighter-text-rgb));
+  }
+
+  input {
+    padding: 8px;
+    border: 1px solid rgb(var(--lighter-text-rgb));
+    border-radius: 8px;
+    background: rgb(var(--base-background-rgb));
+    color: rgb(var(--foreground-text-rgb));
+  }
+
+  button {
+    padding: 8px 16px;
+    background: rgb(var(--primary-color-rgb));
+    color: rgb(var(--background-text-rgb));
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .error {
+    color: red;
+    font-size: 12px;
+  }
+}
+
+.labelInput {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}

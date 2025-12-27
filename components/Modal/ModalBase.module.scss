@@ -1,0 +1,38 @@
+.modal {
+  background: rgb(var(--background-text-rgb));
+  border: 2px solid rgb(var(--lighter-text-rgb));
+  border-radius: 16px;
+  padding: 0 1rem 0 1rem;
+  width: 500px;
+  box-sizing: border-box;
+  max-width: 90vw;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.header {
+  display: flex;
+  h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: rgb(var(--foreground-text-rgb));
+    padding: 1rem 0 1rem 0;
+  }
+  button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: rgb(var(--lighter-text-rgb));
+  }
+}
+
+.body {
+  margin-bottom: 16px;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}   
