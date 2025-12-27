@@ -29,7 +29,7 @@ export default function RootLayout(props: {
     <html className={inter.className} suppressHydrationWarning>
       <body>
         <Providers>
-          <div className="w-full flex justify-center items-center h-[3rem]">
+          <div className="w-full flex justify-center items-center h-[3rem] fixed z-51">
             <ThemeSwitch />
           </div>
           {props.children}

@@ -4,7 +4,7 @@ import SignupModal from "@/components/Sinup/SignupModal";
 
 const Signup = () => {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center h-full">
       <SignupModal />
     </div>
   );
