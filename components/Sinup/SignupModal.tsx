@@ -3,20 +3,14 @@ import { useRouter } from "next/navigation";
 import ModalOverlay from "../Modal/ModalOverlay";
 import styles from "./SignupModal.module.scss";
 import ModalBase from "../Modal/ModalBase";
+import { useUser } from "@/app/providers/UserContext";
 
 const SignupModal = () => {
   const [username, setUsername] = useState("");
-  const [error, setError] = useState("");
-  const router = useRouter();
+  const { login, error } = useUser();
 
   const handleSubmit = () => {
-    if (!username.trim()) {
-      setError("Username is required");
-      return;
-    }
-    localStorage.setItem("username", username);
-    setError("");
-    router.push("/");
+    login(username);
   };
 
   return (

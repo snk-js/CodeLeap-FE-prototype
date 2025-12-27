@@ -3,79 +3,84 @@
 import React, {
   createContext,
   useContext,
-  useEffect,
   useState,
   ReactNode,
+  useEffect,
+  useEffectEvent,
 } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface UserContextType {
-  username?: string;
+  username: string;
   setUsername: (username: string) => void;
   logout: () => void;
+  login: (username: string) => void;
+  error: string;
+  isHydrated: boolean;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
-  const pathname = usePathname();
+  const [username, setUsernameState] = useState("");
+  const [error, setError] = useState("");
+  const [isHydrated, setIsHydrated] = useState(false);
 
-  const getUsernameFromLocalStorage = (() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("username") || "";
+  // won't trigger the Effect to re-run
+  const onInitialize = useEffectEvent((storedUsername: string | null) => {
+    if (storedUsername) {
+      setUsernameState(storedUsername);
+    } else {
+      router.push("/signup");
     }
-  })();
-
-  const [username, setUsernameState] = useState(() => {
-    return getUsernameFromLocalStorage;
+    setIsHydrated(true);
   });
 
   const setUsername = (newUsername: string) => {
     setUsernameState(newUsername);
-
     if (typeof window !== "undefined") {
       if (newUsername) {
         localStorage.setItem("username", newUsername);
       } else {
         localStorage.removeItem("username");
       }
-
-      window.dispatchEvent(
-        new CustomEvent("localStorageUpdate", {
-          detail: { key: "username", value: newUsername },
-        })
-      );
     }
   };
 
   const logout = () => {
     setUsername("");
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("username");
-      router.push("/signup");
+    router.push("/signup");
+  };
+
+  const login = (username: string) => {
+    if (!username.trim()) {
+      setError("Username is required");
+      return;
     }
+    setUsername(username.trim());
+    setError("");
+    router.push("/");
   };
 
   useEffect(() => {
-    const username = localStorage.getItem("username");
-    if (!username && pathname !== "/signup") {
-      router.push("/signup");
-    }
-  }, [pathname, router]);
+    // 2. Access the latest values inside the Effect Event
+    const storedUsername = localStorage.getItem("username");
+    onInitialize(storedUsername);
 
-  useEffect(() => {
-    setUsernameState(getUsernameFromLocalStorage);
-  }, [getUsernameFromLocalStorage]);
+    // 3. Dependency array is now empty (or strictly reactive values only)
+    // We don't need 'router' here because 'onInitialize' is non-reactive
+  }, []);
 
   return (
-    <UserContext.Provider value={{ username, setUsername, logout }}>
+    <UserContext.Provider
+      value={{ username, setUsername, logout, login, error, isHydrated }}
+    >
       {children}
     </UserContext.Provider>
   );
 };
 
-// Custom hook to use the UserContext
 export const useUser = () => {
   const context = useContext(UserContext);
   if (context === undefined) {
