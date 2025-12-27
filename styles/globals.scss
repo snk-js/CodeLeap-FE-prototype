@@ -29,6 +29,14 @@ $lighter-text-dark: 59, 58, 58;          // a bit lighter black
   --lighter-text-rgb: #{$lighter-text-dark};
 }
 
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
 button {
   min-width: 120px;
   height: 32px;
@@ -36,10 +44,6 @@ button {
 
 :root {
   @include light-theme;
-}
-
-.w-md-editor-text {
-  min-height: 100% !important;
 }
 
 .dark {
@@ -59,8 +63,4 @@ body {
   color: rgb(var(--foreground-text-rgb));
   background: rgb(var(--base-background-rgb));
   margin: 0;
-}
-
-svg {
-  z-index: 9000;
 }
