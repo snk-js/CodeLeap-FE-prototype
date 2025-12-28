@@ -2,6 +2,7 @@
 
 import React from "react";
 import styles from "./PostDetails.module.scss";
+import { timeAgo } from "@/app/utils/dates";
 
 interface PostHeaderProps {
   username: string;
@@ -15,7 +16,7 @@ const PostDetails: React.FC<PostHeaderProps> = ({
   return (
     <div className={styles.details}>
       <span className={styles.username}>@{username}</span>
-      <span className={styles.timestamp}>{created_datetime || "Now"}</span>
+      <span className={styles.timestamp}>{timeAgo(created_datetime)}</span>
     </div>
   );
 };

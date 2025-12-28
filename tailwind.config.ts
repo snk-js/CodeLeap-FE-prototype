@@ -10,7 +10,7 @@ export default {
         // white in light theme
         backgroundText: 'rgb(var(--background-text-rgb))',
         // black in light theme
-        foregroundText: 'rgb(var(--background-text-rgb))',
+        foregroundText: 'rgb(var(--foreground-text-rgb))',
       },
     },
   },

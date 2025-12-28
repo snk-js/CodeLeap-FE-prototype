@@ -1,3 +1,4 @@
+// app/components/Home/Home.tsx
 "use client";
 
 import { useUser } from "@/app/providers/UserContext";
@@ -32,11 +33,13 @@ export default function Home() {
     create({ username, title, content });
 
   const handleEdit = (post: IPost) => {
+    if (showDeleteModal) setShowDeleteModal(false);
     setSelectedPost(post);
     setShowEditModal(true);
   };
 
   const handleDelete = (post: IPost) => {
+    if (showEditModal) setShowEditModal(false);
     setSelectedPost(post);
     setShowDeleteModal(true);
   };
@@ -44,12 +47,14 @@ export default function Home() {
   const confirmDelete = () => {
     if (selectedPost) remove(selectedPost.id);
     setShowDeleteModal(false);
+    setSelectedPost(null);
   };
 
   const saveEdit = (title: string, content: string) => {
     if (selectedPost)
       update({ id: selectedPost.id, updated: { title, content } });
     setShowEditModal(false);
+    setSelectedPost(null);
   };
 
   return (
@@ -73,21 +78,27 @@ export default function Home() {
             onDelete={() => handleDelete(post)}
           />
         ))}
+        {showDeleteModal && (
+          <DeleteConfirmModal
+            onConfirm={confirmDelete}
+            onCancel={() => {
+              setShowDeleteModal(false);
+              setSelectedPost(null);
+            }}
+          />
+        )}
+        {showEditModal && selectedPost && (
+          <EditPostModal
+            initialTitle={selectedPost.title}
+            initialContent={selectedPost.content}
+            onSave={saveEdit}
+            onCancel={() => {
+              setShowEditModal(false);
+              setSelectedPost(null);
+            }}
+          />
+        )}
       </div>
-      {showDeleteModal && (
-        <DeleteConfirmModal
-          onConfirm={confirmDelete}
-          onCancel={() => setShowDeleteModal(false)}
-        />
-      )}
-      {showEditModal && selectedPost && (
-        <EditPostModal
-          initialTitle={selectedPost.title}
-          initialContent={selectedPost.content}
-          onSave={saveEdit}
-          onCancel={() => setShowEditModal(false)}
-        />
-      )}
     </>
   );
 }

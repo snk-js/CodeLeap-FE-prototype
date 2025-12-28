@@ -13,15 +13,24 @@ const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({
   onConfirm,
   onCancel,
 }) => {
+  const footer = (
+    <>
+      <button className="bg-[var(--baseBackground)]" onClick={onCancel}>
+        Cancel
+      </button>
+      <button className="bg-[#FF5151] font-bold" onClick={onConfirm}>
+        Delete
+      </button>
+    </>
+  );
+
   return (
     <ModalOverlay onClose={onCancel}>
-      <ModalBase title="Confirm Deletion" onClose={onCancel}>
-        <p>Are you sure you want to delete this post?</p>
-      </ModalBase>
-      <div>
-        <button onClick={onCancel}>Cancel</button>
-        <button onClick={onConfirm}>Delete</button>
-      </div>
+      <ModalBase
+        title="Are you sure you want to delete this item?"
+        onClose={onCancel}
+        footer={footer}
+      />
     </ModalOverlay>
   );
 };

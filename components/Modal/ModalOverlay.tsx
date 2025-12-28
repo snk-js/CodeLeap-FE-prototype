@@ -1,18 +1,34 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
+import ReactDOM from "react-dom";
+import styles from "./ModalOverlay.module.scss";
 
 const ModalOverlay: React.FC<{
   children: React.ReactNode;
   onClose?: () => void;
 }> = ({ children, onClose }) => {
-  return (
-    <div
-      className="h-full bg-black bg-opacity-50 flex items-center justify-center z-50"
-      onClick={onClose}
-    >
-      <div onClick={(e) => e.stopPropagation()}>{children}</div>
-    </div>
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && onClose) onClose();
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleEsc);
+
+    return () => {
+      document.body.style.overflow = "unset";
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, [onClose]);
+
+  return ReactDOM.createPortal(
+    <div className={styles.overlay} onClick={onClose}>
+      <div className={styles.content} onClick={(e) => e.stopPropagation()}>
+        {children}
+      </div>
+    </div>,
+    document.body
   );
 };
 

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import ModalOverlay from "../Modal/ModalOverlay";
 import styles from "./SignupModal.module.scss";
 import ModalBase from "../Modal/ModalBase";

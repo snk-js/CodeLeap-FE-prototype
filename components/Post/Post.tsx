@@ -29,7 +29,7 @@ const Post: React.FC<PostProps> = ({ post, isOwnPost, onEdit, onDelete }) => {
         username={post.username}
         created_datetime={post.created_datetime}
       />
-      <p>{post.content}</p>
+      <p className="break-words">{post.content}</p>
     </div>
   );
 };
