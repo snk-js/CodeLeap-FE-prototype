@@ -5,13 +5,17 @@ $primary-color: 118, 149, 236;      // Blue
 $background-text: 255, 255, 255;    // White
 $foreground-text: 0, 0, 0;          // Black
 $lighter-text: 119, 119, 119;       // a bit grey
+$border: 153, 153, 153;
+$secondary-color: 255, 255, 255;
 
 // Dark theme variables
 $base-background-dark: 18, 18, 18;       // Very dark gray (not pure black)
 $primary-color-dark: 137, 201, 141;      // Lighter/brighter blue for better contrast
 $background-text-dark: 28, 28, 28;          // Black (reversed from light theme)
 $foreground-text-dark: 255, 255, 255;    // White
-$lighter-text-dark: 77, 77, 77;          // a bit lighter black  
+$lighter-text-dark: 77, 77, 77;   
+$border-dark: 153, 153, 153;       // a bit lighter black  
+$secondary-color-dark: 22, 22, 22;
 
 @mixin light-theme {
   --base-background-rgb: #{$base-background};
@@ -19,6 +23,8 @@ $lighter-text-dark: 77, 77, 77;          // a bit lighter black
   --background-text-rgb: #{$background-text};
   --foreground-text-rgb: #{$foreground-text};
   --lighter-text-rgb: #{$lighter-text};
+  --border-rgb: #{$border};
+  --secondary-color-rgb: #{$secondary-color};
 }
 
 @mixin dark-theme {
@@ -27,6 +33,8 @@ $lighter-text-dark: 77, 77, 77;          // a bit lighter black
   --background-text-rgb: #{$background-text-dark};
   --foreground-text-rgb: #{$foreground-text-dark};
   --lighter-text-rgb: #{$lighter-text-dark};
+  --border-rgb: #{$border-dark};
+  --secondary-color-rgb: #{$secondary-color-dark};
 }
 
 *,
@@ -46,6 +54,7 @@ button {
 
 :root {
   @include light-theme;
+  --base-spacing: 1.5rem;
 }
 
 .dark {

@@ -27,7 +27,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [error, setError] = useState("");
   const [isHydrated, setIsHydrated] = useState(false);
 
-  // won't trigger the Effect to re-run
+  // Avoid hydration mismatch: Load username from localStorage only after client-side
+  // hydration completes. This prevents SSR rendering "" while client expects the username.
+
+  // 1. won't trigger the Effect to re-run
   const onInitialize = useEffectEvent((storedUsername: string | null) => {
     if (storedUsername) {
       setUsernameState(storedUsername);

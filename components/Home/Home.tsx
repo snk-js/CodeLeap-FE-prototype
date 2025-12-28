@@ -10,16 +10,18 @@ const dummyPosts = [
   {
     id: "1",
     username: "user1",
-    created_datetime: "2023-01-01T12:00:00Z",
+    created_datetime: "25 minutes ago",
     title: "Dummy Post 1",
-    content: "This is the content of the first dummy post.",
+    content:
+      "Curabitur suscipit suscipit tellus. Phasellus consectetuer vestibulum elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas egestas arcu quis ligula mattis placerat. \n\n Duis vel nibh at velit scelerisque suscipit. Duis lobortis massa imperdiet quam. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Fusce a quam. Nullam vel sem. Nullam cursus lacinia erat.",
   },
   {
     id: "2",
     username: "user2",
-    created_datetime: "2023-01-02T12:00:00Z",
+    created_datetime: "45 minutes ago",
     title: "Dummy Post 2",
-    content: "This is the content of the second dummy post.",
+    content:
+      "Curabitur suscipit suscipit tellus. Phasellus consectetuer vestibulum elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas egestas arcu quis ligula mattis placerat. \n\n Duis vel nibh at velit scelerisque suscipit. Duis lobortis massa imperdiet quam. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Fusce a quam. Nullam vel sem. Nullam cursus lacinia erat.",
   },
 ];
 

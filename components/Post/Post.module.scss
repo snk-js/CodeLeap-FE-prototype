@@ -1,14 +1,16 @@
 .post {
-  background: rgb(var(--background-text-rgb));
-  border: 1px solid rgb(var(--lighter-text-rgb));
+  background: rgb(var(--secondary-color-rgb));
+  border: 1px solid rgb(var(--border-rgb));
   border-radius: 16px;
-  padding: 16px;
-  margin-bottom: 16px;
-  h3 {
-    font-size: 18px;
-    margin-bottom: 8px;
-  }
+  overflow: hidden;
+  margin-bottom: var(--base-spacing);
+
   p {
-    font-size: 14px;
+    padding: 0 var(--base-spacing) var(--base-spacing) var(--base-spacing);
+    margin-top: 0;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    white-space: pre-line;
   }
 }

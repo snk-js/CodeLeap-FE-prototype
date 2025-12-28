@@ -1,18 +1,19 @@
-.header {
+.details {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
   color: rgb(var(--primary-color-rgb));
+  padding: var(--base-spacing) var(--base-spacing) 0.5rem var(--base-spacing);
+  font-size: 18px;
 }
 
 .username {
   font-weight: bold;
-  color: rgb(var(--primary-color-rgb));
+  color: rgb(var(--lighter-text-rgb));
 }
 
 .timestamp {
-  font-size: 12px;
   color: rgb(var(--lighter-text-rgb));
 }
 

@@ -3,7 +3,6 @@
 import "@/styles/globals.css";
 import "@/styles/globals.scss";
 
-import { inter } from "@/styles/fonts";
 import Providers from "./providers/Providers";
 import AppBar from "@/components/AppBar/AppBar";
 
@@ -14,7 +13,7 @@ export default function RootLayout(props: {
   // next-themes adds className and style attributes
   // to the <html> tag after the client mounts
   return (
-    <html className={inter.className} suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <body>
         <Providers>
           <AppBar />

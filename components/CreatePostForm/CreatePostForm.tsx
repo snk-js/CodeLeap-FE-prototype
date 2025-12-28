@@ -24,18 +24,25 @@ const CreatePostForm: React.FC<CreatePostFormProps> = ({
 
   return (
     <div className={styles.form}>
-      <label>Title</label>
-      <input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder={placeholder}
-      />
-      <label>Content</label>
-      <textarea
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        placeholder="Post content"
-      />
+      <h2>{placeholder}</h2>
+      <div className={styles.entries}>
+        <div className={styles.entrie}>
+          <label>Title</label>
+          <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder={"Hello World"}
+          />
+        </div>
+        <div className={styles.entrie}>
+          <label>Content</label>
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="Content here"
+          />
+        </div>
+      </div>
       <button
         onClick={handleSubmit}
         disabled={!title.trim() || !content.trim()}

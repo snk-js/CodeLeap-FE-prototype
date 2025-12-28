@@ -2,7 +2,7 @@
   background: rgb(var(--background-text-rgb));
   border: 2px solid rgb(var(--lighter-text-rgb));
   border-radius: 16px;
-  padding: 0 1rem 0 1rem;
+  padding: 0 var(--base-spacing) 0 var(--base-spacing);
   width: 500px;
   box-sizing: border-box;
   max-width: 90vw;
@@ -16,7 +16,7 @@
     font-weight: 700;
     font-size: 22px;
     color: rgb(var(--foreground-text-rgb));
-    padding: 1rem 0 1rem 0;
+    padding: var(--base-spacing) 0 var(--base-spacing) 0;
   }
   button {
     background: none;

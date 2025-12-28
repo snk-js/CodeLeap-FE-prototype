@@ -19,7 +19,7 @@ const PostDetails: React.FC<PostHeaderProps> = ({
   onDelete,
 }) => {
   return (
-    <div className={styles.header}>
+    <div className={styles.details}>
       <span className={styles.username}>@{username}</span>
       <span className={styles.timestamp}>{created_datetime || "Now"}</span>
       {isOwnPost && (
