@@ -5,7 +5,7 @@ import PostDetails from "./PostDetails/PostDetails";
 
 interface PostProps {
   post: {
-    id: string;
+    id: number;
     username: string;
     created_datetime: string | null;
     title: string;
@@ -19,13 +19,15 @@ interface PostProps {
 const Post: React.FC<PostProps> = ({ post, isOwnPost, onEdit, onDelete }) => {
   return (
     <div className={styles.post}>
-      <PostHeader title={post.title} />
-      <PostDetails
-        username={post.username}
-        created_datetime={post.created_datetime}
+      <PostHeader
+        title={post.title}
         isOwnPost={isOwnPost}
         onEdit={onEdit}
         onDelete={onDelete}
+      />
+      <PostDetails
+        username={post.username}
+        created_datetime={post.created_datetime}
       />
       <p>{post.content}</p>
     </div>

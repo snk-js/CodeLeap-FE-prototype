@@ -5,31 +5,51 @@ import CreatePostForm from "../CreatePostForm/CreatePostForm";
 import CreatePostHeader from "../CreatePostForm/CreatePostHeader/CreatePostHeader";
 import Post from "../Post/Post";
 import styles from "./Home.module.scss";
-
-const dummyPosts = [
-  {
-    id: "1",
-    username: "user1",
-    created_datetime: "25 minutes ago",
-    title: "Dummy Post 1",
-    content:
-      "Curabitur suscipit suscipit tellus. Phasellus consectetuer vestibulum elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas egestas arcu quis ligula mattis placerat. \n\n Duis vel nibh at velit scelerisque suscipit. Duis lobortis massa imperdiet quam. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Fusce a quam. Nullam vel sem. Nullam cursus lacinia erat.",
-  },
-  {
-    id: "2",
-    username: "user2",
-    created_datetime: "45 minutes ago",
-    title: "Dummy Post 2",
-    content:
-      "Curabitur suscipit suscipit tellus. Phasellus consectetuer vestibulum elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas egestas arcu quis ligula mattis placerat. \n\n Duis vel nibh at velit scelerisque suscipit. Duis lobortis massa imperdiet quam. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Fusce a quam. Nullam vel sem. Nullam cursus lacinia erat.",
-  },
-];
+import {
+  useCreatePost,
+  useDeletePost,
+  usePosts,
+  useUpdatePost,
+} from "@/app/hooks/post";
+import { useState } from "react";
+import { Post as IPost } from "@/app/api/types";
+import DeleteConfirmModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
+import EditPostModal from "../EditPostModal/EditPostModal";
 
 export default function Home() {
   const { username } = useUser();
 
-  const handleCreate = (title: string, content: string) => {
-    console.log("Create post:", title, content);
+  const { data: posts = [], isLoading, error } = usePosts();
+  const { mutate: create } = useCreatePost();
+  const { mutate: update } = useUpdatePost();
+  const { mutate: remove } = useDeletePost();
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedPost, setSelectedPost] = useState<IPost | null>(null);
+
+  const handleCreate = (title: string, content: string) =>
+    create({ username, title, content });
+
+  const handleEdit = (post: IPost) => {
+    setSelectedPost(post);
+    setShowEditModal(true);
+  };
+
+  const handleDelete = (post: IPost) => {
+    setSelectedPost(post);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = () => {
+    if (selectedPost) remove(selectedPost.id);
+    setShowDeleteModal(false);
+  };
+
+  const saveEdit = (title: string, content: string) => {
+    if (selectedPost)
+      update({ id: selectedPost.id, updated: { title, content } });
+    setShowEditModal(false);
   };
 
   return (
@@ -40,16 +60,34 @@ export default function Home() {
           onCreate={handleCreate}
           placeholder="What's on your mind?"
         />
-        {dummyPosts.map((post) => (
+        {isLoading && <p>Loading...</p>}
+        {error && (
+          <p className="text-red-500">Error: {(error as Error).message}</p>
+        )}
+        {posts.map((post) => (
           <Post
             key={post.id}
             post={post}
             isOwnPost={post.username === username}
-            onEdit={() => console.log("Edit post:", post.id)}
-            onDelete={() => console.log("Delete post:", post.id)}
+            onEdit={() => handleEdit(post)}
+            onDelete={() => handleDelete(post)}
           />
         ))}
       </div>
+      {showDeleteModal && (
+        <DeleteConfirmModal
+          onConfirm={confirmDelete}
+          onCancel={() => setShowDeleteModal(false)}
+        />
+      )}
+      {showEditModal && selectedPost && (
+        <EditPostModal
+          initialTitle={selectedPost.title}
+          initialContent={selectedPost.content}
+          onSave={saveEdit}
+          onCancel={() => setShowEditModal(false)}
+        />
+      )}
     </>
   );
 }
