@@ -2,11 +2,11 @@ import { baseURL } from "./endpoints";
 import { GetPostsResponse, PaginatedPosts, PostPost, PostPostResponse } from "./types";
 
 
-export const fetchPosts = async (page = 1, page_size = 5): Promise<GetPostsResponse> => {
+export const fetchPosts = async (page = 1, page_size = 5): Promise<PaginatedPosts> => {
   const response = await fetch(`${baseURL}?page=${page}&page_size=${page_size}`);
   if (!response.ok) throw new Error("Failed to fetch posts");
   const data: PaginatedPosts = await response.json();
-  return data.results;
+  return data;
 };
 
 export const createPost = async (newPost: PostPost): Promise<PostPostResponse> => {

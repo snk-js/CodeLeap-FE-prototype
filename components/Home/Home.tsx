@@ -1,4 +1,3 @@
-// app/components/Home/Home.tsx
 "use client";
 
 import { useUser } from "@/app/providers/UserContext";
@@ -12,15 +11,23 @@ import {
   usePosts,
   useUpdatePost,
 } from "@/app/hooks/post";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Post as IPost } from "@/app/api/types";
 import DeleteConfirmModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import EditPostModal from "../EditPostModal/EditPostModal";
+import { useInfiniteScroll } from "@/app/hooks/useInfiniteScroll";
 
 export default function Home() {
   const { username } = useUser();
 
-  const { data: posts = [], isLoading, error } = usePosts();
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    error,
+  } = usePosts();
   const { mutate: create } = useCreatePost();
   const { mutate: update } = useUpdatePost();
   const { mutate: remove } = useDeletePost();
@@ -28,6 +35,20 @@ export default function Home() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedPost, setSelectedPost] = useState<IPost | null>(null);
+
+  const sentinelRef = useInfiniteScroll(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, !!hasNextPage);
+
+  useEffect(() => {
+    if (data && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [data, hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  const posts = data?.pages.flatMap((page) => page.results) || [];
 
   const handleCreate = (title: string, content: string) =>
     create({ username, title, content });
@@ -65,6 +86,7 @@ export default function Home() {
           onCreate={handleCreate}
           placeholder="What's on your mind?"
         />
+        {isLoading && <p>Loading...</p>}
         {error && (
           <p className="text-red-500">Error: {(error as Error).message}</p>
         )}
@@ -77,27 +99,31 @@ export default function Home() {
             onDelete={() => handleDelete(post)}
           />
         ))}
-        {showDeleteModal && (
-          <DeleteConfirmModal
-            onConfirm={confirmDelete}
-            onCancel={() => {
-              setShowDeleteModal(false);
-              setSelectedPost(null);
-            }}
-          />
-        )}
-        {showEditModal && selectedPost && (
-          <EditPostModal
-            initialTitle={selectedPost.title}
-            initialContent={selectedPost.content}
-            onSave={saveEdit}
-            onCancel={() => {
-              setShowEditModal(false);
-              setSelectedPost(null);
-            }}
-          />
-        )}
+        {isFetchingNextPage && <p>Loading more...</p>}
+        {!hasNextPage && <p>No more posts.</p>}
+        <div ref={sentinelRef} style={{ height: "1px" }} />{" "}
+        {/* Sentinel element */}
       </div>
+      {showDeleteModal && (
+        <DeleteConfirmModal
+          onConfirm={confirmDelete}
+          onCancel={() => {
+            setShowDeleteModal(false);
+            setSelectedPost(null);
+          }}
+        />
+      )}
+      {showEditModal && selectedPost && (
+        <EditPostModal
+          initialTitle={selectedPost.title}
+          initialContent={selectedPost.content}
+          onSave={saveEdit}
+          onCancel={() => {
+            setShowEditModal(false);
+            setSelectedPost(null);
+          }}
+        />
+      )}
     </>
   );
 }
