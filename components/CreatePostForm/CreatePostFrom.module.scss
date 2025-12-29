@@ -7,24 +7,6 @@
   display: flex;
   flex-direction: column;
 
-  label {
-    font-size: 14px;
-    color: rgb(var(--foreground-text-rgb));
-  }
-
-  input, textarea {
-    padding: 8px;
-    border: 1px solid rgb(var(--lighter-text-rgb));
-    border-radius: 8px;
-    background: rgb(var(--background-text-rgb));
-    color: rgb(var(--foreground-text-rgb));
-  }
-
-  textarea {
-    height: 100px;
-    resize: vertical;
-  }
-
   button {
     align-self: flex-end;
     margin-top: var(--base-spacing);
@@ -39,16 +21,4 @@
       cursor: not-allowed;
     }
   }
-}
-
-.entrie {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.entries {
-  display: flex;
-  flex-direction: column;
-  gap: var(--base-spacing)
 }

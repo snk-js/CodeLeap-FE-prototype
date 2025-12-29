@@ -1,0 +1,39 @@
+.body {
+  margin-bottom: 16px;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+
+  button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    min-width: 120px;
+    transition: background-color 0.3s ease;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .cancel {
+    background: rgb(var(--lighter-text-rgb));
+    color: rgb(var(--foreground-text-rgb));
+    &:hover {
+      background: rgb(var(--lighter-text-rgb)),
+    }
+  }
+
+  .save {
+    background: rgb(var(--primary-color-rgb));
+    color: rgba(var(--background-text-rgb)0.8);
+    &:hover {
+      background: rgba(var(--primary-color-rgb), 0.5)
+    }
+  }
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import PostFormFields from "../PostFormFields/PostFormFields";
 import styles from "./CreatePostFrom.module.scss";
 
 interface CreatePostFormProps {
@@ -25,24 +26,12 @@ const CreatePostForm: React.FC<CreatePostFormProps> = ({
   return (
     <div className={styles.form}>
       <h2>{placeholder}</h2>
-      <div className={styles.entries}>
-        <div className={styles.entrie}>
-          <label>Title</label>
-          <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder={"Hello World"}
-          />
-        </div>
-        <div className={styles.entrie}>
-          <label>Content</label>
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="Content here"
-          />
-        </div>
-      </div>
+      <PostFormFields
+        title={title}
+        setTitle={setTitle}
+        content={content}
+        setContent={setContent}
+      />
       <button
         onClick={handleSubmit}
         disabled={!title.trim() || !content.trim()}

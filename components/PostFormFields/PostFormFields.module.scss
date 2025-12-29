@@ -1,0 +1,30 @@
+.entries {
+  display: flex;
+  flex-direction: column;
+  gap: var(--base-spacing);
+}
+
+.entry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  label {
+    font-size: 14px;
+    color: rgb(var(--foreground-text-rgb));
+  }
+
+  input,
+  textarea {
+    padding: 8px;
+    border: 1px solid rgb(var(--lighter-text-rgb));
+    border-radius: 8px;
+    background: rgb(var(--background-text-rgb));
+    color: rgb(var(--foreground-text-rgb));
+  }
+
+  textarea {
+    height: 100px;
+    resize: vertical;
+  }
+}
