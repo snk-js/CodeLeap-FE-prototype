@@ -55,7 +55,7 @@ button {
 
 :root {
   @include light-theme;
-  --base-spacing: 1.5rem;
+  --base-spacing: clamp(12px, 3vw, 24px);
 }
 
 .dark {

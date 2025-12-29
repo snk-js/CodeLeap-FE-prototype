@@ -4,12 +4,14 @@
   border-radius: 16px;
   padding: 0 var(--base-spacing) 0 var(--base-spacing);
   width: 500px;
-  min-width: 660px;
+  min-width: 660px;   
   box-sizing: border-box;
   max-width: 90vw;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   position: relative;
   animation: fadeIn 0.3s ease-out;
+  min-width: 100%;
+  box-sizing: border-box;
 }
 
 @keyframes fadeIn {
