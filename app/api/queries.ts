@@ -1,5 +1,5 @@
 import { baseURL } from "./endpoints";
-import { GetPostsResponse, PaginatedPosts, PostPost, PostPostResponse } from "./types";
+import { PaginatedPosts, PostPost, PostPostResponse } from "./types";
 
 
 export const fetchPosts = async (page = 1, page_size = 5): Promise<PaginatedPosts> => {

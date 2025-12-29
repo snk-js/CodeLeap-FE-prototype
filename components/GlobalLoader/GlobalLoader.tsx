@@ -1,4 +1,3 @@
-// app/components/GlobalLoader/GlobalLoader.tsx
 "use client";
 
 import { useIsFetching, useIsMutating } from "@tanstack/react-query";
