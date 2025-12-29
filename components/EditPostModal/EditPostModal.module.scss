@@ -22,18 +22,19 @@
   }
 
   .cancel {
-    background: rgb(var(--lighter-text-rgb));
+    background: rgb(var(--background-text-rgb));
     color: rgb(var(--foreground-text-rgb));
     &:hover {
       background: rgb(var(--lighter-text-rgb)),
     }
+    border: 1px solid rgb(var(--border-rgb))
   }
 
   .save {
-    background: rgb(var(--primary-color-rgb));
-    color: rgba(var(--background-text-rgb)0.8);
+    background: #47B960;
+    color: white;
     &:hover {
-      background: rgba(var(--primary-color-rgb), 0.5)
+      background: #63eb80
     }
   }
 }

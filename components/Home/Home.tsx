@@ -65,7 +65,6 @@ export default function Home() {
           onCreate={handleCreate}
           placeholder="What's on your mind?"
         />
-        {isLoading && <p>Loading...</p>}
         {error && (
           <p className="text-red-500">Error: {(error as Error).message}</p>
         )}

@@ -1,7 +1,8 @@
 .container {
   max-width: 800px;
   margin: 0 auto;
-  min-height: 1500px;
   position: relative;
+  min-height: auto;
+  height: fit-content;
   background: rgb(var(--background-text-rgb));
 }

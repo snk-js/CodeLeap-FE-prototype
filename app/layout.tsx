@@ -5,6 +5,7 @@ import "@/styles/globals.scss";
 
 import Providers from "./providers/Providers";
 import AppBar from "@/components/AppBar/AppBar";
+import GlobalLoader from "@/components/GlobalLoader/GlobalLoader";
 
 export default function RootLayout(props: {
   children: React.ReactNode;
@@ -18,6 +19,7 @@ export default function RootLayout(props: {
         <Providers>
           <AppBar />
           {props.children}
+          <GlobalLoader />
         </Providers>
       </body>
     </html>
