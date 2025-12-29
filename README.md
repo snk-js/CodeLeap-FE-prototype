@@ -21,7 +21,7 @@ A modern social networking app built with Next.js 15, React, and React Query for
 - **Other**: React Portals, Intersection Observer, Custom Hooks (e.g., useInfiniteScroll)
 
 ## Installation
-1. Clone the repo: `git clone <repo-url>`
+1. Clone the repo: `git clone git@github.com:snk-js/CodeLeap-FE-prototype.git`
 2. Install dependencies: `npm install`
 3. Run dev server: `npm run dev`
 4. Visit `http://localhost:3000`
