@@ -11,7 +11,7 @@ import {
   usePosts,
   useUpdatePost,
 } from "@/app/hooks/post";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Post as IPost } from "@/app/api/types";
 import DeleteConfirmModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import EditPostModal from "../EditPostModal/EditPostModal";
@@ -41,12 +41,6 @@ export default function Home() {
       fetchNextPage();
     }
   }, !!hasNextPage);
-
-  useEffect(() => {
-    if (data && hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }, [data, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   const posts = data?.pages.flatMap((page) => page.results) || [];
 

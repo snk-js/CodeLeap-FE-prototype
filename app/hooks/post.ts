@@ -4,17 +4,17 @@ import { createPost, deletePost, fetchPosts, updatePost } from "../api/queries";
 export const usePosts = () => {
   return useInfiniteQuery({
     queryKey: ["posts"],
-    queryFn: ({ pageParam = 1 }) => fetchPosts(pageParam, 5),
-    initialPageParam: 1,
-    getNextPageParam: (lastPage) => {
-      if (!lastPage.next) return undefined;
-      const match = lastPage.next.match(/page=(\d+)/);
-      const pageNumber = match ? Number(match[1]) : undefined;
-      return pageNumber;
+    queryFn: ({ pageParam = 0 }) => fetchPosts(pageParam, 10),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages) => {
+      if (!lastPage.next || lastPage.results.length === 0) return undefined;
+      const nextUrl = new URL(lastPage.next);
+      const params = new URLSearchParams(nextUrl.search);
+      const nextOffset = parseInt(params.get('offset') || '0', 10);
+      return nextOffset;
     },
   });
 };
-
 export const useCreatePost = () => {
   const queryClient = useQueryClient();
   return useMutation({
