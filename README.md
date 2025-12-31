@@ -1,7 +1,7 @@
 # CodeLeap Network App
 
 ## Overview
-A modern social networking app built with Next.js 15, React, and React Query for managing posts. Features user authentication via username, post creation/editing/deletion, dark/light theme switching, infinite scrolling, and responsive modals.
+A very minimal social networking app (twitter like) built with Next.js 16, React, and React Query for managing posts. Features user (dummy0 authentication via username, post creation/editing/deletion, dark/light theme switching, infinite scrolling, and responsive modals.
 
 ## Key Features
 - **User Signup & Authentication**: Simple username-based signup with localStorage persistence; redirects unauthenticated users to signup.
