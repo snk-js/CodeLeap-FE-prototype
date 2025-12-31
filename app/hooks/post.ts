@@ -1,12 +1,13 @@
 import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { createPost, deletePost, fetchPosts, updatePost } from "../api/queries";
+import { fetchPosts } from "../api/queries";
+import { createPost, deletePost, updatePost } from "../api/mutations";
 
 export const usePosts = () => {
   return useInfiniteQuery({
     queryKey: ["posts"],
     queryFn: ({ pageParam = 0 }) => fetchPosts(pageParam, 10),
     initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages) => {
+    getNextPageParam: (lastPage) => {
       if (!lastPage.next || lastPage.results.length === 0) return undefined;
       const nextUrl = new URL(lastPage.next);
       const params = new URLSearchParams(nextUrl.search);
