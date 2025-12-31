@@ -12,6 +12,8 @@ A very minimal social networking app (twitter like) built with Next.js 16, React
 - **Responsive Design**: Container-based layout with max-width 800px, adjustable height, and global base spacing (1.5rem).
 - **Loading Spinner**: Custom animated spinner with theme integration for async operations.
 - **App Bar**: Fixed top bar with username display, theme switcher, and logout button, featuring glassmorphism effect.
+- **Zod input validation**: Input validation with Zod is crucial for forms security and type safety (developer experience)
+- **React Hook Forms**: More consistent Form state, type safe management
 
 ## Tech Stack
 - **Framework**: Next.js 15 (App Router)
@@ -32,8 +34,6 @@ A very minimal social networking app (twitter like) built with Next.js 16, React
 - Edit/delete your own posts via icons.
 - Scroll to load more (if paginated API supports).
 - Toggle themes in the app bar.
-
-For API integration, configure endpoints in `api/posts.ts` (e.g., baseURL: https://dev.company.co.uk/careers/).
 
 ## License
 MIT
