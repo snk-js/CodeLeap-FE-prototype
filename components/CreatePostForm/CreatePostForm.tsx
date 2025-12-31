@@ -1,7 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
-import PostFormFields from "../PostFormFields/PostFormFields";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import PostFormFields, {
+  PostFormData,
+  postSchema,
+} from "../PostFormFields/PostFormFields";
 import styles from "./CreatePostFrom.module.scss";
 
 interface CreatePostFormProps {
@@ -13,31 +18,33 @@ const CreatePostForm: React.FC<CreatePostFormProps> = ({
   onCreate,
   placeholder,
 }) => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+    reset,
+  } = useForm<PostFormData>({
+    resolver: zodResolver(postSchema),
+    defaultValues: {
+      title: "",
+      content: "",
+    },
+  });
 
-  const handleSubmit = () => {
-    if (!title.trim() || !content.trim()) return;
-    onCreate(title, content);
-    setTitle("");
-    setContent("");
+  const onSubmit = (data: PostFormData) => {
+    onCreate(data.title, data.content);
+    reset();
   };
 
   return (
     <div className={styles.form}>
       <h2>{placeholder}</h2>
-      <PostFormFields
-        title={title}
-        setTitle={setTitle}
-        content={content}
-        setContent={setContent}
-      />
-      <button
-        onClick={handleSubmit}
-        disabled={!title.trim() || !content.trim()}
-      >
-        Create
-      </button>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <PostFormFields register={register} errors={errors} />
+        <button type="submit" disabled={!isValid}>
+          Create
+        </button>
+      </form>
     </div>
   );
 };

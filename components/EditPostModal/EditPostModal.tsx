@@ -1,9 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import ModalOverlay from "../Modal/ModalOverlay";
 import ModalBase from "../Modal/ModalBase";
-import PostFormFields from "../PostFormFields/PostFormFields";
+import PostFormFields, {
+  PostFormData,
+  postSchema,
+} from "../PostFormFields/PostFormFields";
 import styles from "./EditPostModal.module.scss";
 
 interface EditPostModalProps {
@@ -19,39 +24,43 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
   onSave,
   onCancel,
 }) => {
-  const [title, setTitle] = useState(initialTitle);
-  const [content, setContent] = useState(initialContent);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<PostFormData>({
+    resolver: zodResolver(postSchema),
+    defaultValues: {
+      title: initialTitle,
+      content: initialContent,
+    },
+  });
 
-  const handleSave = () => {
-    if (!title.trim() || !content.trim()) return;
-    onSave(title, content);
+  const onSubmit = (data: PostFormData) => {
+    onSave(data.title, data.content);
   };
 
   return (
     <ModalOverlay onClose={onCancel}>
       <ModalBase title="Edit Post" onClose={onCancel}>
-        <div className={styles.body}>
-          <PostFormFields
-            title={title}
-            setTitle={setTitle}
-            content={content}
-            setContent={setContent}
-            titlePlaceholder="Enter title"
-            contentPlaceholder="Enter content"
-          />
-        </div>
-        <div className={styles.footer}>
-          <button className={styles.cancel} onClick={onCancel}>
-            Cancel
-          </button>
-          <button
-            className={styles.save}
-            onClick={handleSave}
-            disabled={!title.trim() || !content.trim()}
-          >
-            Save
-          </button>
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.body}>
+            <PostFormFields
+              register={register}
+              errors={errors}
+              titlePlaceholder="Enter title"
+              contentPlaceholder="Enter content"
+            />
+          </div>
+          <div className={styles.footer}>
+            <button type="button" className={styles.cancel} onClick={onCancel}>
+              Cancel
+            </button>
+            <button type="submit" className={styles.save} disabled={!isValid}>
+              Save
+            </button>
+          </div>
+        </form>
       </ModalBase>
     </ModalOverlay>
   );

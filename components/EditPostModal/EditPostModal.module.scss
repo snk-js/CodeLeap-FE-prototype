@@ -1,9 +1,10 @@
-.body {
+.form {
   margin-bottom: 16px;
 }
 
 .footer {
   display: flex;
+  margin-top: var(--base-spacing);
   justify-content: flex-end;
   gap: 8px;
 
