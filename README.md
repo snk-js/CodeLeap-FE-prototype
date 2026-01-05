@@ -3,6 +3,20 @@
 ## Overview
 A very minimal social networking app (twitter like) built with Next.js 16, React, and React Query for managing posts. Features user (dummy0 authentication via username, post creation/editing/deletion, dark/light theme switching, infinite scrolling, and responsive modals.
 
+The first content Paint is in Signup page, which requires user to set a username and then get the fetch for the posts:
+<img width="946" height="357" alt="image" src="https://github.com/user-attachments/assets/f1211cb7-db9e-4d58-883b-0b3839a8b14d" />
+--- 
+<img width="970" height="277" alt="image" src="https://github.com/user-attachments/assets/d654f624-3f71-4d07-a180-97e8eb90757d" />
+
+although, critical CSS takes 120ms (seen how to optmize)
+
+<img width="1000" height="542" alt="image" src="https://github.com/user-attachments/assets/30c27609-4bda-41d1-a866-d3e7e1f28221" />
+
+As this is a simple application, best practices in security ramain perfect in Lighthouse 
+(that's not an achievement, it's normal to get this metric when the application didn't scaled yet):
+<img width="970" height="654" alt="image" src="https://github.com/user-attachments/assets/b0cac5cd-a086-4f4c-89a2-acd333dafb51" />
+
+
 ## Key Features
 - **User Signup & Authentication**: Simple username-based signup with localStorage persistence; redirects unauthenticated users to signup.
 - **Post Management**: Create, edit, delete posts with React Query for data fetching/mutations. Supports infinite pagination for loading more posts.
